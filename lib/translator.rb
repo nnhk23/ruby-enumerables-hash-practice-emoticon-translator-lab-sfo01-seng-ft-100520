@@ -10,8 +10,10 @@ final_result = emoticon.each_with_object({}) do |(key, value), result|
       :english => value[0],
       :japanese => value[1]
     }
+      #binding.pry
 end
 final_result
+#binding.pry
 end
 
 
@@ -35,6 +37,19 @@ def get_english_meaning(emoticon_file, japanese_emoticon)
     if japanese_emoticon == value[:japanese]
       english_meaning = key
     elsif english_meaning == ""
+      english_meaning = "Sorry, that emoticon was not found"
+    end
+  end
+  english_meaning
+end
+
+def get_english_meaning(emoticon_file, japanese_emoticon)
+  english_meaning = ""
+  emoticon = YAML.load_file('./lib/emoticons.yml')
+  load_library(emoticon_file).each do |key, value|
+    if japanese_emoticon == value[:japanese]
+      english_meaning = key
+    else
       english_meaning = "Sorry, that emoticon was not found"
     end
   end
